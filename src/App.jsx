@@ -6,6 +6,10 @@ import { useEffect, useRef, useState } from "react";
 //   FaCaretUp,
 // } from "react-icons/fa";
 import { AiFillCaretLeft } from "react-icons/ai";
+import { BsMoisture } from "react-icons/bs";
+import { CiTempHigh } from "react-icons/ci";
+import { PiPlant } from "react-icons/pi";
+import { SiAtom } from "react-icons/si";
 import "./App.css";
 import MarsImage from "./assets/mars image.jpg";
 import MarsArm from "./assets/mars rover arm.jpg";
@@ -29,19 +33,19 @@ const App = () => {
 
   // handle servo control
   const handleServo1 = (event) => {
-    setServo1(event.target.value);
+    setServo1(Number(event.target.value));
   };
 
   const handleServo2 = (event) => {
-    setServo2(event.target.value);
+    setServo2(Number(event.target.value));
   };
 
   const handleServo3 = (event) => {
-    setServo3(event.target.value);
+    setServo3(Number(event.target.value));
   };
 
   const handleServo4 = (event) => {
-    setServo4(event.target.value);
+    setServo4(Number(event.target.value));
   };
 
   // handle rover control with mouse
@@ -83,45 +87,41 @@ const App = () => {
   // handle rover control with arrow keys
   const handleKeyDown = (event) => {
     switch (event.key) {
-      case "ArrowUp":
+      case "w":
         setForward(true);
         break;
-      case "ArrowDown":
+      case "s":
         setBackward(true);
         break;
-      case "ArrowLeft":
+      case "a":
         setLeft(true);
         break;
-      case "ArrowRight":
+      case "d":
         setRight(true);
         break;
       case "1":
-        if (event.shiftKey) {
-          setServo1((prevValue) => Math.max(prevValue - 1, 0)); // Decrease servo1 value, but not below 0
-        } else {
-          setServo1((prevValue) => Math.min(prevValue + 1, 180)); // Increase servo1 value, but not beyond 180
-        }
+        setServo1((prevValue) => Math.min(prevValue + 1, 180));
+        break;
+      case "!":
+        setServo1((prevValue) => Math.max(prevValue - 1, 0));
         break;
       case "2":
-        if (event.shiftKey) {
-          setServo2((prevValue) => Math.max(prevValue - 1, 0)); // Decrease servo2 value, but not below 0
-        } else {
-          setServo2((prevValue) => Math.min(prevValue + 1, 180)); // Increase servo2 value, but not beyond 180
-        }
+        setServo2((prevValue) => Math.min(prevValue + 1, 180));
+        break;
+      case "@":
+        setServo2((prevValue) => Math.max(prevValue - 1, 0));
         break;
       case "3":
-        if (event.shiftKey) {
-          setServo3((prevValue) => Math.max(prevValue - 1, 0)); // Decrease servo3 value, but not below 0
-        } else {
-          setServo3((prevValue) => Math.min(prevValue + 1, 180)); // Increase servo3 value, but not beyond 180
-        }
+        setServo3((prevValue) => Math.min(prevValue + 1, 180));
+        break;
+      case "#":
+        setServo3((prevValue) => Math.max(prevValue - 1, 0));
         break;
       case "4":
-        if (event.shiftKey) {
-          setServo4((prevValue) => Math.max(prevValue - 1, 0)); // Decrease servo4 value, but not below 0
-        } else {
-          setServo4((prevValue) => Math.min(prevValue + 1, 180)); // Increase servo4 value, but not beyond 180
-        }
+        setServo4((prevValue) => Math.min(prevValue + 1, 180));
+        break;
+      case "$":
+        setServo4((prevValue) => Math.max(prevValue - 1, 0));
         break;
       default:
         break;
@@ -130,10 +130,10 @@ const App = () => {
 
   const handleKeyUp = (event) => {
     switch (event.key) {
-      case "ArrowUp":
-      case "ArrowDown":
-      case "ArrowLeft":
-      case "ArrowRight":
+      case "w":
+      case "s":
+      case "a":
+      case "d":
         setForward(false);
         setBackward(false);
         setLeft(false);
@@ -291,8 +291,60 @@ const App = () => {
           molestiae omnis officiis adipisci, unde cupiditate id, voluptatem
           repudiandae dolore soluta.
         </div>
-        <div className="item5 col-span-2 overflow-hidden rounded-xl border border-[#a6aab5] bg-[#13162780] p-5">
-          Item 5
+        <div className="item5 col-span-2 overflow-hidden rounded-xl border border-[#a6aab5] bg-[#13162780] p-5 tracking-widest">
+          <h2 className="text-center text-lg font-bold text-slate-500">
+            Chemical Data
+          </h2>
+          <div className="flex h-[90%] w-full flex-col items-center justify-around">
+            <div className="item flex items-center gap-3">
+              <div className="icon">
+                <SiAtom className="text-xl" />
+              </div>
+              <div className="text w-[100px]">Hydrogen</div>
+              <div className="level_container h-[16px] w-[280px] overflow-hidden rounded-full bg-[#2e3349]">
+                <div
+                  className="level h-full w-[30%] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(9,250,145,1) 0%, rgba(86,195,226,1) 100%)",
+                  }}
+                ></div>
+              </div>
+              <div className="percent">30%</div>
+            </div>
+            <div className="item flex items-center gap-3">
+              <div className="icon">
+                <SiAtom className="text-xl" />
+              </div>
+              <div className="text w-[100px]">Alcohol</div>
+              <div className="level_container h-[16px] w-[280px] overflow-hidden rounded-full bg-[#2e3349]">
+                <div
+                  className="level h-full w-[60%] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(9,250,145,1) 0%, rgba(86,195,226,1) 100%)",
+                  }}
+                ></div>
+              </div>
+              <div className="percent">60%</div>
+            </div>
+            <div className="item flex items-center gap-3">
+              <div className="icon">
+                <SiAtom className="text-xl" />
+              </div>
+              <div className="text w-[100px]">Methane</div>
+              <div className="level_container h-[16px] w-[280px] overflow-hidden rounded-full bg-[#2e3349]">
+                <div
+                  className="level h-full w-[40%] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(9,250,145,1) 0%, rgba(86,195,226,1) 100%)",
+                  }}
+                ></div>
+              </div>
+              <div className="percent">40%</div>
+            </div>
+          </div>
         </div>
         <div className="body_cam relative col-span-3 row-span-2 flex items-center justify-center overflow-hidden rounded-xl border border-[#a6aab5] bg-[#13162780]">
           <img src={MarsImage} alt="mars image" className="cover h-full" />
@@ -374,7 +426,59 @@ const App = () => {
           </div>
         </div>
         <div className="item8 col-span-2 overflow-hidden rounded-xl border border-[#a6aab5] bg-[#13162780] p-5">
-          Data
+          <h2 className="text-center text-lg font-bold text-slate-500">
+            Environmental Data
+          </h2>
+          <div className="flex h-[90%] w-full flex-col justify-around">
+            <div className="item flex items-center justify-start gap-3">
+              <div className="icon">
+                <CiTempHigh className="w-[25px] text-2xl" />
+              </div>
+              <div className="text w-[120px]">Temperature</div>
+              <div className="level_container h-[16px] w-[240px] overflow-hidden rounded-full bg-[#2e3349]">
+                <div
+                  className="level h-full w-[45%] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 50%)",
+                  }}
+                ></div>
+              </div>
+              <div className="percent">29&deg; C</div>
+            </div>
+            <div className="item flex items-center justify-start gap-3">
+              <div className="icon">
+                <BsMoisture className="w-[25px] text-xl" />
+              </div>
+              <div className="text w-[120px]">Humidity</div>
+              <div className="level_container h-[16px] w-[240px] overflow-hidden rounded-full bg-[#2e3349]">
+                <div
+                  className="level h-full w-[75%] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)",
+                  }}
+                ></div>
+              </div>
+              <div className="percent">75%</div>
+            </div>
+            <div className="item flex items-center justify-start gap-3">
+              <div className="icon">
+                <PiPlant className="w-[25px] text-xl" />
+              </div>
+              <div className="text w-[120px]">Soil Moisture</div>
+              <div className="level_container h-[16px] w-[240px] overflow-hidden rounded-full bg-[#2e3349]">
+                <div
+                  className="level h-full w-[40%] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0, 145, 36,1) 0%, rgba(0, 149, 255,1) 100%)",
+                  }}
+                ></div>
+              </div>
+              <div className="percent">40%</div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
